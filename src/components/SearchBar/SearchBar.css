@@ -1,0 +1,12 @@
+.search-bar__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+
+.search-bar__input {
+    max-width: 40vw;
+    width: 100%;
+    padding: 0.4em;
+}

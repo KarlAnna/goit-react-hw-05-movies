@@ -1,0 +1,15 @@
+.reviews__container {
+    padding: 32px 0;
+}
+
+.reviews__list {
+    max-width: 100vw;
+}
+
+.reviews__item {
+    padding-bottom: 18px;
+}
+
+.reviews__author {
+    padding-bottom: 0.6em;
+}
