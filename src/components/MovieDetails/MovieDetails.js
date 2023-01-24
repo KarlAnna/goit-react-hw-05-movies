@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation, useParams } from 'react-router-dom'
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom'
 import { useState, useEffect, Suspense } from 'react'
 import { getMovieDetailsById } from '../../services/MovieDatabaseApi'
 import './MovieDetails.css'
@@ -8,7 +8,7 @@ const MovieDetails = () => {
     const { movieId } = useParams()
     const [movie, setMovie] = useState([])
     const location = useLocation()
-    const backLinkHref = location.state?.location ?? '/'
+    const backLinkHref = location.state ?? '/'
 
     useEffect(() => {
         getMovieDetailsById(movieId)
@@ -19,7 +19,7 @@ const MovieDetails = () => {
 
     return (
         <div className='movie-details__container'>
-            <NavLink to={backLinkHref}>Go Back</NavLink>
+            <Link to={backLinkHref}>Go Back</Link>
             <div className='movie-details__info'>
                 <div className='movie-details__poster-container'>
                     {poster_path &&
@@ -31,7 +31,7 @@ const MovieDetails = () => {
                 </div>
                 <div className='movie-details__info-container'>
                     <h2 className='movie-details__info-title'>{title}</h2>
-                    <p className='movie-details__info-page'>User Score: {Math.round((vote_average / 10) * 100)}%</p>
+                    {vote_average && <p className='movie-details__info-page'>User Score: {Math.round((vote_average / 10) * 100)}%</p>}
                     <h2 className='movie-details__info-title'>Overview</h2>
                     <p className='movie-details__info-page'>{overview}</p>
                     <h2 className='movie-details__info-title'>Genres</h2>
@@ -47,8 +47,8 @@ const MovieDetails = () => {
             <div>
                 <h2 className='movie-details__info-title movie-details__add-info-title'>Additional Information</h2>
                 <ul className='movie-details__more-info-list'>
-                    <li><NavLink to={`cast`} state={movieId}>Cast</NavLink></li>
-                    <li><NavLink to={`reviews`} state={movieId}>Reviews</NavLink></li>
+                    <li><Link to={`cast`} state={backLinkHref}>Cast</Link></li>
+                    <li><Link to={`reviews`} state={backLinkHref}>Reviews</Link></li>
                 </ul>
                 <Suspense fallback={<div>Loading page...</div>}>
                     <Outlet />

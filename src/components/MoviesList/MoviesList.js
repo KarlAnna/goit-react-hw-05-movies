@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import './MoviesList.css'
 
-export const MoviesList = ({movies}) => {
+export const MoviesList = ({ movies }) => {
 
     const [moviesList, setMoviesList] = useState([])
     const location = useLocation()
@@ -21,7 +21,7 @@ export const MoviesList = ({movies}) => {
                         {moviesList.map(({id, title, poster_path, overview}) => {
                             return (
                                 <li className='movies__item' key={id}>
-                                    <NavLink state={{location}} to={`/movies/${id}`}>
+                                    <Link state={location} to={`/movies/${id}`}>
                                         {poster_path &&
                                             <img 
                                                 loading='lazy' 
@@ -32,7 +32,7 @@ export const MoviesList = ({movies}) => {
                                         <div className='movies__item-overlay'>
                                             <p className='movies__item-description'>{overview}</p>
                                         </div>
-                                    </NavLink>
+                                    </Link>
                                 </li>
                             )
                         })}
@@ -43,7 +43,7 @@ export const MoviesList = ({movies}) => {
     )
 }
 
-MoviesList.propType = {
+MoviesList.propTypes = {
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,

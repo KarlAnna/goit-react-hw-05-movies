@@ -1,25 +1,23 @@
-import { useState, useEffect, Suspense } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { getMovieCastById } from '../../services/MovieDatabaseApi'
 import './Cast.css'
 
 const Cast = () => {
 
-    const location = useLocation()
-
+    const { movieId } = useParams()
     const [cast, setCast] = useState([])
 
     useEffect(() => {
-        getMovieCastById(location.state)
+        getMovieCastById(movieId)
             .then(cast => {
                 setCast([...cast])
         })
-    }, [location.state])
+    }, [movieId])
     
     return (
         <div>
-            <Suspense fallback={null}>
-            {cast.length > 0 &&
+            {cast.length > 0 ?
                 <ul className='cast__list'>
                     {cast.map(({id, name, character, profile_path}) => (
                         <li className='cast__item' key={id}>
@@ -29,8 +27,8 @@ const Cast = () => {
                         </li>
                     ))}
                 </ul>
+                 : <p>We don't have information about cast</p>
             }
-            </Suspense>
         </div>
     )
 }

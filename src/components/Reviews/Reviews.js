@@ -1,19 +1,19 @@
-import { useState, useEffect, Suspense } from 'react'
-import { useLocation, Outlet } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { getMovieReviewsById } from '../../services/MovieDatabaseApi'
 import './Reviews.css'
 
 const Reviews = () => {
 
-    const location = useLocation()
+    const { movieId } = useParams()
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-        getMovieReviewsById(location.state)
+        getMovieReviewsById(movieId)
             .then(reviews => {
                 setReviews([...reviews])
         })
-    }, [location.state])
+    }, [movieId])
     
 
     return (
@@ -27,11 +27,8 @@ const Reviews = () => {
                         </li>
                     ))}
                 </ul>
-                : `We don't have ane reviews for this movie`
+                : <p>We don't have any reviews for this movie</p>
             }
-            <Suspense fallback={null}>
-                <Outlet />
-            </Suspense>
         </div>
     )
 }
