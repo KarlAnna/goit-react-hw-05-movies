@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { getMovieReviewsById } from '../../services/MovieDatabaseApi'
-import './Reviews.css'
+import { getMovieReviewsById } from '../services/MovieDatabaseApi'
 
 const Reviews = () => {
 
@@ -17,13 +16,13 @@ const Reviews = () => {
     
 
     return (
-        <div className='reviews__container'>
+        <div className="py-8">
             {reviews.length > 0 ?
-                <ul className='reviews__list'>
+                <ul className="flex gap-3 flex-wrap">
                     {reviews.map(({id, author, content}) => (
-                        <li className='reviews__item' key={id}>
-                            <h3 className='reviews__author'>{author}</h3>
-                            <p>{content}</p>
+                        <li key={id}>
+                            <h3>{author}</h3>
+                            <p className="text-xs sm:text-sm">{content}</p>
                         </li>
                     ))}
                 </ul>

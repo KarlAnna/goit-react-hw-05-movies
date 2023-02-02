@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 import { getTrendingMovies } from '../services/MovieDatabaseApi'
-import { MoviesList } from '../components/MoviesList/MoviesList'
+import { MoviesList } from '../components/MoviesList'
 
 const Home = () => {
 
     const [trendingMovies, setTrendingMovies] = useState([])
 
     useEffect(() => {
-        getTrendingMovies().then(data => {
-            setTrendingMovies([...data.results])
+        getTrendingMovies().then(movies => {
+            setTrendingMovies([...movies])
         })
     }, [])
 
     return (
         <>
-            <h2 className='movies__title'>Trending Today</h2>
+            <h1 className="text-center text-4xl py-8 font-semibold">Trending Today</h1>
             <MoviesList movies={trendingMovies} />
         </>
     )

@@ -7,7 +7,7 @@ export function getTrendingMovies() {
     try {
         return axios.get(`${BASE_URL}trending/movie/day?${API_KEY}`)
             .then(res => {
-                return res.data
+                return res.data.results
             })
     } catch (error) {
         console.log(error);
@@ -47,9 +47,9 @@ export function getMovieReviewsById(id) {
     }
 }
 
-export function searchMoviesByName(q) {
+export function searchMoviesByName(q, page) {
     try {
-        return axios.get(`${BASE_URL}search/movie?query=${q}&page=1&${API_KEY}`)
+        return axios.get(`${BASE_URL}search/movie?query=${q}&page=${page}&${API_KEY}`)
             .then(res => {
                 if (res.data.results.length > 0) {
                     return res.data.results

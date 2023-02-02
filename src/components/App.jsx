@@ -1,16 +1,28 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { SharedLayout } from './SharedLayout/SharedLayout';
+import MoonLoader from 'react-spinners/MoonLoader';
+
+import { SharedLayout } from './SharedLayout';
 const Home = lazy(() => import('../pages/Home'));
 const Movies = lazy(() => import('../pages/Movies'));
-const MovieDetails = lazy(() => import('../components/MovieDetails/MovieDetails'));
-const Cast = lazy(() => import('../components/Cast/Cast'));
-const Reviews = lazy(() => import('../components/Reviews/Reviews'));
+const MovieDetails = lazy(() => import('./MovieDetails'));
+const Cast = lazy(() => import('./Cast'));
+const Reviews = lazy(() => import('./Reviews'));
+
+export const loader = (
+  <MoonLoader
+    color="#6347f9"
+    cssOverride={{ display: 'block', margin: '0 auto', padding: "18 0" }}
+    size={100}
+    aria-label="Loading Spinner"
+    data-testid="loader"
+  />
+);
 
 export const App = () => {
   return (
-    <div className="container">
+    <div className="">
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
