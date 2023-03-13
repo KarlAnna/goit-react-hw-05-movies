@@ -3,16 +3,26 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply font-sans bg-wild-sand text-cloud-burst;
+/** Links **/
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0.1em;
+  border-radius: 4px;
+  background-color: #1f3347;
+  bottom: 0;
+  left: 0;
+  transform-origin: right;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
 }
 
-.navlink:hover:not(.active) {
-  @apply -translate-y-1;
-}
-
-.navlink.active {
-  @apply shadow-btn;
+.nav-link:hover::before,
+.nav-link.active::before {
+  transform-origin: left;
+  transform: scaleX(1);
 }
 
 .info-link:hover:not(.active) .info-link-icon {
@@ -23,8 +33,15 @@ body {
   @apply rotate-90;
 }
 
-.container {
-  @apply my-0 mx-auto px-4 w-[100%] max-w-[100vw];
+.library-link.active,
+.library-link:hover {
+  @apply text-royal-blue;
+}
+
+/** Other **/
+
+body {
+  @apply font-sans bg-wild-sand text-cloud-burst;
 }
 
 h2 {
@@ -33,4 +50,8 @@ h2 {
 
 h3 {
   @apply font-semibold text-lg pb-2;
+}
+
+.container {
+  @apply my-0 mx-auto px-4 w-[100%] max-w-[100vw];
 }
