@@ -17,9 +17,9 @@ const Library = () => {
         <li>
           <NavLink
             className="library-link transition ease-in-out duration-300 font-semibold text-lg p-1"
-            to={`watched`}
+            to={`liked`}
           >
-            Watched
+            Liked
           </NavLink>
         </li>
       </ul>

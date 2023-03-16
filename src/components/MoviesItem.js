@@ -18,7 +18,7 @@ export const MoviesItem = ({ movies }) => {
                   alt={title}
                 />
               )}
-              <div className="bg-dark-royal-blue-0.6 h-[100%] px-2 opacity-0 group-hover:opacity-100 group-hover:duration-500 absolute top-0 left-0 text-center">
+              <div className="bg-dark-accent-color h-[100%] px-2 opacity-0 group-hover:opacity-100 group-hover:duration-500 absolute top-0 left-0 text-center">
                 <p className="text-[white] group-hover:translate-y-[15vh] group-hover:duration-700 text-sm">
                   {overview}
                 </p>

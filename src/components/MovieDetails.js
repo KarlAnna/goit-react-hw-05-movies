@@ -3,20 +3,37 @@ import { useState, useEffect } from 'react';
 import { getMovieDetailsById } from '../services/MovieDatabaseApi';
 import { MovieDetailsAddInfo } from './MovieDetailsAddInfo';
 import { FiArrowLeftCircle } from 'react-icons/fi';
-import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
+  const [queue, setQueue] = useLocalStorage('queue', []);
+  const [liked, setLiked] = useLocalStorage('liked', []);
+  const [isInQueue, setIsInQueue] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const backLinkHref = location.state ?? '/';
 
   useEffect(() => {
     getMovieDetailsById(movieId).then(setMovie);
-  }, [movieId]);
+    setIsInQueue(queue.some(item => item.id === Number(movieId)));
+    setIsLiked(liked.some(item => item.id === Number(movieId)));
+  }, [movieId, queue, liked]);
 
-  const setToLocaleStorage = e => {
+  const isMovieInList = movieList => {
+    return movieList.some(item => item.title === movie.title);
+  };
+
+  const handleButtonClick = e => {
     const { name } = e.target;
+    const movieList = name === 'toQueue' ? queue : liked;
+    const setMovieList = name === 'toQueue' ? setQueue : setLiked;
+    const result = isMovieInList(movieList);
+    const updatedMovieList = result
+      ? movieList.filter(item => item.id !== movie.id)
+      : [...movieList, movie];
+    setMovieList(updatedMovieList);
   };
 
   const { title, release_date, poster_path, overview, genres, vote_average } =
@@ -65,20 +82,20 @@ const MovieDetails = () => {
             <button
               name="toQueue"
               type="button"
-              onClick={setToLocaleStorage}
-              className="bg-royal-blue text-[white] text-sm sm:text-base font-semibold py-[0.5vh] px-[2vw]
-                             rounded shadow hover:bg-light-royal-blue-0.6 hover:text-cloud-burst transition ease-in-out duration-500"
+              onClick={handleButtonClick}
+              className="bg-accent-color text-[white] text-sm sm:text-base font-semibold py-1 px-3 rounded shadow 
+              hover:bg-light-accent-color hover:text-primary-text-color duration-200"
             >
-              Add to queue
+              {isInQueue ? 'Remove from Queue' : 'Add to Queue'}
             </button>
             <button
-              name="toWatched"
+              name="toLiked"
               type="button"
-              onClick={setToLocaleStorage}
-              className="bg-royal-blue text-[white] text-sm sm:text-base font-semibold py-[0.5vh] px-[2vw]
-                             rounded shadow hover:bg-light-royal-blue-0.6 hover:text-cloud-burst transition ease-in-out duration-500"
+              onClick={handleButtonClick}
+              className="bg-accent-color text-[white] text-sm sm:text-base font-semibold py-1 px-3 rounded shadow 
+              hover:bg-light-accent-color hover:text-primary-text-color duration-200"
             >
-              Add to watched
+              {isLiked ? 'Remove from Liked' : 'Add to Liked'}
             </button>
           </div>
         </div>

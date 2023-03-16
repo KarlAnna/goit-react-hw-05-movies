@@ -11,16 +11,17 @@ const MovieDetails = lazy(() => import('./MovieDetails'));
 const Cast = lazy(() => import('./Cast'));
 const Reviews = lazy(() => import('./Reviews'));
 const Queue = lazy(() => import('./Queue'));
-const Watched = lazy(() => import('./Watched'));
+const Liked = lazy(() => import('./Liked'));
 
 export const loader = (
-  <MoonLoader
-    color="#6347f9"
-    cssOverride={{ display: 'flex', margin: '0 auto' }}
-    size={80}
-    aria-label="Loading Spinner"
-    data-testid="loader"
-  />
+  <div className='flex items-center justify-center py-[40vh]'>
+    <MoonLoader
+      color="#c70039"
+      size={80}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
+  </div>
 );
 
 export const App = () => {
@@ -34,8 +35,9 @@ export const App = () => {
           <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="library" element={<Library />}>
+          <Route index element={<Queue />} />
           <Route path="queue" element={<Queue />} />
-          <Route path="watched" element={<Watched />} />
+          <Route path="liked" element={<Liked />} />
         </Route>
       </Route>
       <Route path="*" element={<Home />} />

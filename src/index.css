@@ -35,13 +35,13 @@
 
 .library-link.active,
 .library-link:hover {
-  @apply text-royal-blue;
+  @apply text-accent-color;
 }
 
 /** Other **/
 
 body {
-  @apply font-sans bg-wild-sand text-cloud-burst;
+  @apply font-sans bg-primary-color text-primary-text-color;
 }
 
 h2 {

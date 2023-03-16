@@ -3,11 +3,11 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
-      'royal-blue': '#6347f9',
-      'dark-royal-blue-0.6': 'rgba(30, 21, 75, 0.6)',
-      'light-royal-blue-0.6': 'rgba(177, 163, 252, 0.6)',
-      'wild-sand': '#f5f5f5',
-      'cloud-burst': '#1f3347',
+      'primary-color': '#f5f5f5',
+      'accent-color': '#c70039',
+      'dark-accent-color': 'rgba(80, 0, 23, 0.6)',
+      'light-accent-color': 'rgba(233, 153, 176, 0.6)',
+      'primary-text-color': '#1f3347',
     },
   },
   plugins: [],

@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { searchMoviesByName } from '../services/MovieDatabaseApi';
 import { MoviesList } from 'components/MoviesList';
 import { BiSearchAlt } from 'react-icons/bi';
 
 export const Searcher = () => {
-  const [searchMovies, setSearchMovies] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  // const queryParams = new URLSearchParams(useLocation().search);
   const query = searchParams.get('query');
+  // const page = searchParams.get('page');
 
   const onChange = e => {
     const { value } = e.target;
@@ -21,16 +23,23 @@ export const Searcher = () => {
     if (!query) {
       return;
     }
-    searchMoviesByName(query, page).then(({ results, total_pages }) => {
-      setSearchMovies(results);
-      setTotalPages(Math.ceil(total_pages / 20));
+    searchMoviesByName(query, currentPage).then(({ results, total_pages }) => {
+      setSearchedMovies(results);
+      setSearchParams({ query: query, page: currentPage });
+      // setTotalPages(Math.ceil(total_pages / 20));
     });
-  }, [query, page]);
+  }, [query, currentPage, setSearchParams]);
+  
 
   const onSubmit = e => {
     e.preventDefault();
-    setSearchParams({ query: searchQuery });
+    setSearchParams({ query: searchQuery, page: currentPage });
     setSearchQuery('');
+  };
+
+  const onLoadMore = () => {
+    let next = currentPage + 1
+    setCurrentPage(next);
   };
 
   return (
@@ -40,20 +49,21 @@ export const Searcher = () => {
         onSubmit={onSubmit}
       >
         <span className="sr-only">Search</span>
-        <button className="absolute px-3 bg-light-royal-blue-0.6 h-10 rounded-md flex justify-center items-center text-cloud-burst">
+        <button className="absolute px-3 bg-light-accent-color h-10 rounded-md flex justify-center items-center text-primary-text-color">
           <BiSearchAlt />
         </button>
         <input
-          className="placeholder:italic placeholder:text-dark-royal-blue-0.6 border border-dark-royal-blue-0.6/40 focus:border-light-royal-blue-0.6 focus:outline-none rounded-md py-2 px-12 w-full shadow-sm text-cloud-burst"
+          className="placeholder:italic placeholder:text-dark-accent-color border border-dark-accent-color/40 focus:border-light-accent-color focus:outline-none rounded-md py-2 px-12 w-full shadow-sm text-primary-text-color"
           placeholder="Type something..."
           type="text"
           value={searchQuery}
           onChange={onChange}
         />
       </form>
-      {searchMovies.length > 0 && (
+      {searchedMovies.length > 0 && (
         <>
-          <MoviesList movies={searchMovies} />
+          <MoviesList movies={searchedMovies} />
+          <button onClick={onLoadMore}>MORE</button>
         </>
       )}
     </div>

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// import { useState, useEffect } from 'react'
 import { MoviesItem } from './MoviesItem';
 
 export const MoviesList = ({ movies }) => {

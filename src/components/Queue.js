@@ -1,7 +1,9 @@
 import { MoviesList } from './MoviesList';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 const Queue = () => {
-  return <MoviesList />;
+  const [queue] = useLocalStorage('queue', []);
+  return <MoviesList movies={queue} />;
 };
 
 export default Queue;
