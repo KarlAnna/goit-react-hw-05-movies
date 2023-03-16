@@ -35,7 +35,6 @@ export const App = () => {
           <Route path="reviews" element={<Reviews />} />
         </Route>
         <Route path="library" element={<Library />}>
-          <Route index element={<Queue />} />
           <Route path="queue" element={<Queue />} />
           <Route path="liked" element={<Liked />} />
         </Route>
