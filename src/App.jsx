@@ -3,18 +3,18 @@ import { Route, Routes } from 'react-router-dom';
 
 import MoonLoader from 'react-spinners/MoonLoader';
 
-import { SharedLayout } from './SharedLayout';
-const Home = lazy(() => import('../pages/Home'));
-const Movies = lazy(() => import('../pages/Movies'));
-const Library = lazy(() => import('../pages/Library'));
-const MovieDetails = lazy(() => import('./MovieDetails'));
-const Cast = lazy(() => import('./Cast'));
-const Reviews = lazy(() => import('./Reviews'));
-const Queue = lazy(() => import('./Queue'));
-const Liked = lazy(() => import('./Liked'));
+import { SharedLayout } from './components/SharedLayout';
+const Home = lazy(() => import('./pages/Home'));
+const Movies = lazy(() => import('./pages/Movies'));
+const Library = lazy(() => import('./pages/Library'));
+const MovieDetails = lazy(() => import('./components/MovieDetails'));
+const Cast = lazy(() => import('./components/Cast'));
+const Reviews = lazy(() => import('./components/Reviews'));
+const Queue = lazy(() => import('./components/Queue'));
+const Liked = lazy(() => import('./components/Liked'));
 
 export const loader = (
-  <div className='flex items-center justify-center py-[40vh]'>
+  <div className="flex items-center justify-center py-[40vh]">
     <MoonLoader
       color="#c70039"
       size={80}

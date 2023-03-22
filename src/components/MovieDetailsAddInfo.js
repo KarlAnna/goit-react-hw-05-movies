@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { RiArrowRightSLine } from 'react-icons/ri';
-import { loader } from './App';
+import { loader } from '../App';
 
 export const MovieDetailsAddInfo = ({ backLinkHref }) => {
   return (

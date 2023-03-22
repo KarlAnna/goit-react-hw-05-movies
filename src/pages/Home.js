@@ -7,7 +7,7 @@ const Home = () => {
 
   useEffect(() => {
     getTrendingMovies().then(movies => {
-      setTrendingMovies([...movies]);
+      setTrendingMovies(movies);
     });
   }, []);
 

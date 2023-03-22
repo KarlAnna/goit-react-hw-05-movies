@@ -1,11 +1,11 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { loader } from './App';
+import { loader } from '../App';
 
 export const SharedLayout = () => {
   return (
     <>
-      <header id='header' className="bg-[white] shadow-inner">
+      <header id="header" className="bg-[white] shadow-inner">
         <nav className="flex justify-evenly py-4">
           <NavLink
             to="/"

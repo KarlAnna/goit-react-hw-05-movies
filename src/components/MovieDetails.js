@@ -2,40 +2,18 @@ import { Link, useLocation, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieDetailsById } from '../services/MovieDatabaseApi';
 import { MovieDetailsAddInfo } from './MovieDetailsAddInfo';
+import { MovieDetailsBtns } from './MovieDetailsBtns';
 import { FiArrowLeftCircle } from 'react-icons/fi';
-import { BsHeart, BsHeartFill } from 'react-icons/bs';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
-  const [queue, setQueue] = useLocalStorage('queue', []);
-  const [liked, setLiked] = useLocalStorage('liked', []);
-  const [isInQueue, setIsInQueue] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const backLinkHref = location.state ?? '/';
 
   useEffect(() => {
     getMovieDetailsById(movieId).then(setMovie);
-    setIsInQueue(queue.some(item => item.id === Number(movieId)));
-    setIsLiked(liked.some(item => item.id === Number(movieId)));
-  }, [movieId, queue, liked]);
-
-  const isMovieInList = movieList => {
-    return movieList.some(item => item.title === movie.title);
-  };
-
-  const handleButtonClick = e => {
-    const { name } = e.target;
-    const movieList = name === 'toQueue' ? queue : liked;
-    const setMovieList = name === 'toQueue' ? setQueue : setLiked;
-    const result = isMovieInList(movieList);
-    const updatedMovieList = result
-      ? movieList.filter(item => item.id !== movie.id)
-      : [...movieList, movie];
-    setMovieList(updatedMovieList);
-  };
+  }, [movieId]);
 
   const { title, release_date, poster_path, overview, genres, vote_average } =
     movie;
@@ -79,25 +57,7 @@ const MovieDetails = () => {
                 ))}
             </ul>
           </div>
-          <div className="flex gap-2 py-4">
-            <button
-              name="toLiked"
-              type="button"
-              onClick={handleButtonClick}
-              className="text-accent-color p-2 hover:scale-125 duration-200"
-            >
-              {isLiked ? <BsHeartFill size={18} /> : <BsHeart />}
-            </button>
-            <button
-              name="toQueue"
-              type="button"
-              onClick={handleButtonClick}
-              className="bg-accent-color text-[white] text-sm sm:text-base font-semibold py-1 px-3 rounded shadow 
-              hover:bg-light-accent-color hover:text-primary-text-color duration-200"
-            >
-              {isInQueue ? 'Remove from Queue' : 'Add to Queue'}
-            </button>
-          </div>
+          <MovieDetailsBtns movie={movie} />
         </div>
       </div>
       <MovieDetailsAddInfo backLinkHref={backLinkHref} />
