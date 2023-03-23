@@ -30,4 +30,4 @@ The data is provided by The Movie DB API.
 
 ## Mockup
 
-(![Website mockup](./assets/mockup.png))
+![Website mockup](./assets/mockup.png)
