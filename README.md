@@ -28,4 +28,6 @@ search, add and remove movies from your library using The Movie DB API
 This project was created by me.
 The data is provided by The Movie DB API.
 
-![Creating repo from a template step 1](./assets/template-step-1.png)
+## Mockup
+
+(![Website mockup](./assets/mockup.png))
