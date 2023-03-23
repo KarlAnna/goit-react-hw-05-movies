@@ -9,19 +9,19 @@ export const SharedLayout = () => {
         <nav className="flex justify-evenly py-4">
           <NavLink
             to="/"
-            className="nav-link relative text-lg text-primary-text-color flex items-center"
+            className="nav-link relative text-xl lg:text-lg text-primary-text-color flex items-center"
           >
             Home
           </NavLink>
           <NavLink
             to="movies"
-            className="nav-link relative text-lg text-primary-text-color flex items-center"
+            className="nav-link relative text-xl lg:text-lg text-primary-text-color flex items-center"
           >
             Movies
           </NavLink>
           <NavLink
             to="library"
-            className="nav-link relative text-lg text-primary-text-color flex items-center"
+            className="nav-link relative text-xl lg:text-lg text-primary-text-color flex items-center"
           >
             Library
           </NavLink>
