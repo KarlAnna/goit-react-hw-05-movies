@@ -31,6 +31,6 @@ This project was created by me. The data is provided by The Movie DB API.
 
 ## Mockup
 
-![Website "Home" mockup 03.23.2023](./assets/mockup_home.png),
-![Website "Movies" mockup 03.23.2023](./assets/mockup_movies_dog-query.png),
+![Website "Home" mockup 03.23.2023](./assets/mockup_home.png)
+![Website "Movies" mockup 03.23.2023](./assets/mockup_movies_dog-query.png)
 ![Website "Library" mockup 03.23.2023](./assets/mockup_library_liked.png)
