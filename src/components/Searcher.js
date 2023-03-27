@@ -7,12 +7,10 @@ import { BiSearchAlt } from 'react-icons/bi';
 export const Searcher = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
-  // const queryParams = new URLSearchParams(useLocation().search);
   const query = searchParams.get('query');
-  // const page = searchParams.get('page');
+  const page = searchParams.get('page');
 
   const onChange = e => {
     const { value } = e.target;
@@ -23,36 +21,45 @@ export const Searcher = () => {
     if (!query) {
       return;
     }
-    searchMoviesByName(query, currentPage).then(({ results, total_pages }) => {
+    setSearchParams({ query: query, page: page });
+    searchMoviesByName(query, page).then(({ results, total_pages }) => {
       setSearchedMovies(results);
-      setSearchParams({ query: query, page: currentPage });
       setTotalPages(total_pages);
     });
-  }, [query, currentPage, setSearchParams]);
+  }, [query, page, setSearchParams]);
+
+  const updatePage = value => {
+    setSearchParams({ query, page: value });
+  };
 
   const onSubmit = e => {
     e.preventDefault();
-    setSearchParams({ query: searchQuery, page: currentPage });
+    setSearchParams({ query: searchQuery, page: 1 });
     setSearchQuery('');
   };
 
   const onLoad = e => {
     const { name } = e.target;
-    const next = currentPage + 1;
-    const prev = currentPage - 1;
+    const numberPage = Number(page)
+    const next = numberPage + 1;
+    const prev = numberPage - 1;
 
     switch (name) {
       case 'first':
-        setCurrentPage(1);
+        updatePage(1);
         break;
       case 'prev':
-        setCurrentPage(prev);
+        if (numberPage !== 1) {
+          updatePage(prev);
+        }
         break;
       case 'next':
-        setCurrentPage(next);
+        if (numberPage !== totalPages) {
+          updatePage(next);
+        }
         break;
       case 'last':
-        setCurrentPage(totalPages);
+        updatePage(totalPages);
         break;
       default:
         return;
@@ -88,7 +95,7 @@ export const Searcher = () => {
             <button name="prev" onClick={onLoad}>
               prev
             </button>
-            <p className="bg-[pink]">{currentPage}</p>
+            <p className="bg-[pink]">{page}</p>
             <button name="next" onClick={onLoad}>
               next
             </button>

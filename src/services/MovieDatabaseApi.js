@@ -46,7 +46,9 @@ export function getMovieReviewsById(id) {
 export function searchMoviesByName(q, page) {
   try {
     return axios
-      .get(`${BASE_URL}search/movie?query=${q}&page=${page}&${API_KEY}`)
+      .get(
+        `${BASE_URL}search/movie?query=${q}&page=${page}&include_adult=false&${API_KEY}`
+      )
       .then(res => {
         if (res.data.results.length > 0) {
           return res.data;

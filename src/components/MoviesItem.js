@@ -18,9 +18,11 @@ export const MoviesItem = ({ movies }) => {
                   alt={title}
                 />
               )}
-              <div className="bg-dark-accent-color h-[100%] px-2 opacity-0 group-hover:opacity-100 group-hover:duration-500 absolute top-0 left-0 text-center">
-                <p className="text-[white] group-hover:translate-y-[15vh] group-hover:duration-700 text-sm">
-                  {overview}
+              <div className="bg-dark-accent-color h-[100%] w-[100%] px-2 opacity-0 group-hover:opacity-100 group-hover:duration-500 absolute top-0 left-0 text-center overflow-y-auto">
+                <p className="text-[white] group-hover:translate-y-24 group-hover:duration-700 text-sm">
+                  {overview
+                    ? overview
+                    : 'No info about overview for this movie'}
                 </p>
               </div>
             </Link>
