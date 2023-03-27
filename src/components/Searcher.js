@@ -40,7 +40,7 @@ export const Searcher = () => {
 
   const onLoad = e => {
     const { name } = e.target;
-    const numberPage = Number(page)
+    const numberPage = Number(page);
     const next = numberPage + 1;
     const prev = numberPage - 1;
 
@@ -89,17 +89,35 @@ export const Searcher = () => {
         <>
           <MoviesList movies={searchedMovies} />
           <div className="container flex justify-center gap-3">
-            <button name="first" onClick={onLoad}>
+            <button
+              name="first"
+              onClick={onLoad}
+              className="hover:bg-light-accent-color duration-100 w-10 h-10 rounded"
+            >
               1
             </button>
-            <button name="prev" onClick={onLoad}>
+            <button
+              name="prev"
+              onClick={onLoad}
+              className="hover:bg-light-accent-color duration-100 w-10 h-10 rounded"
+            >
               prev
             </button>
-            <p className="bg-[pink]">{page}</p>
-            <button name="next" onClick={onLoad}>
+            <p className="flex items-center justify-center bg-light-accent-color w-10 h-10 rounded">
+              {page}
+            </p>
+            <button
+              name="next"
+              onClick={onLoad}
+              className="hover:bg-light-accent-color duration-100 w-10 h-10 rounded"
+            >
               next
             </button>
-            <button name="last" onClick={onLoad}>
+            <button
+              name="last"
+              onClick={onLoad}
+              className="hover:bg-light-accent-color duration-100 w-10 h-10 rounded"
+            >
               {totalPages}
             </button>
           </div>
