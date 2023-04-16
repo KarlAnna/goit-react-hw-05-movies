@@ -7,11 +7,11 @@ export const MoviesItem = ({ movies }) => {
     <>
       {movies.map(({ id, title, poster_path, overview }) => {
         return (
-          <li className="group relative max-h-xs max-w-xs" key={id}>
+          <li className="group relative" key={id}>
             <Link state={location} to={`/movies/${id}`}>
               {poster_path && (
                 <img
-                  className="w-40 md:w-60 lg:w-72"
+                  className="max-h-[450px] max-w-80"
                   loading="lazy"
                   src={`https://image.tmdb.org/t/p/original${poster_path}`}
                   alt={title}
