@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { loader } from '../App';
+import { loader } from '../components/ui/loader';
 
 const Library = () => {
   return (

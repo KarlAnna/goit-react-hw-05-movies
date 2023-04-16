@@ -5,7 +5,7 @@ export const MoviesList = ({ movies }) => {
   return (
     <div className="container py-8">
       {movies.length > 0 && (
-        <ul className="flex flex-wrap justify-center gap-2">
+        <ul className="flex flex-wrap justify-center gap-2 px-4">
           <MoviesItem movies={movies} />
         </ul>
       )}
