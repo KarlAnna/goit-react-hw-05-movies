@@ -1,4 +1,4 @@
-# React pet-project
+# React project
 
 This project was created with the help of Create React App
 (https://github.com/facebook/create-react-app) and GoIT React Homework Template
